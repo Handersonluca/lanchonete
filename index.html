@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lanchonete & Pizzaria</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="brand">
+        <div class="logo">🍕</div>
+        <div>
+          <h1>Lanchonete & Pizzaria</h1>
+          <p>Pedido rápido • Retirada e entrega</p>
+        </div>
+      </div>
+
+      <nav class="top-actions">
+        <a class="chip" href="#pizzas">🍕 Pizzas</a>
+        <a class="chip" href="#lanches">🍔 Lanches</a>
+        <a class="chip" href="#bebidas">🥤 Bebidas</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap layout">
+    <section class="left">
+      <section class="card hero">
+        <div>
+          <h2>Monte seu pedido</h2>
+          <p class="muted">Clique em <b>Adicionar</b> para escolher adicionais (borda, extras, etc.). Ou use <b>+ Rápido</b>.</p>
+        </div>
+        <div class="hero-badges">
+          <span class="badge">⚡ Fácil</span>
+          <span class="badge">📱 Mobile</span>
+          <span class="badge">✅ Pix</span>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-head">
+          <h2>🔎 Pesquisar</h2>
+          <input id="search" class="search" type="text" placeholder="Ex: calabresa, bacon, suco..." />
+        </div>
+      </section>
+
+      <section id="pizzas" class="card">
+        <h2>🍕 Pizzas</h2>
+        <div id="menu-pizzas" class="menu"></div>
+      </section>
+
+      <section id="lanches" class="card">
+        <h2>🍔 Lanches</h2>
+        <div id="menu-lanches" class="menu"></div>
+      </section>
+
+      <section id="bebidas" class="card">
+        <h2>🥤 Bebidas</h2>
+        <div id="menu-bebidas" class="menu"></div>
+      </section>
+
+      <section class="card info">
+        <h2>📍 Informações</h2>
+        <div class="infoGrid">
+          <div>
+            <h3>Endereço</h3>
+            <p>Rua Exemplo, 123 • Centro</p>
+          </div>
+          <div>
+            <h3>Horário</h3>
+            <p>Ter a Dom • 18:00 — 00:00</p>
+          </div>
+          <div>
+            <h3>Contato</h3>
+            <p>WhatsApp: (66) 99207-9957</p>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <aside class="right">
+      <section class="card cart-card">
+        <div class="cart-head">
+          <h2>🛒 Seu carrinho</h2>
+          <button id="clearCart" class="ghost" type="button">Limpar</button>
+        </div>
+
+        <div id="cart" class="cart"></div>
+
+        <div class="divider"></div>
+
+        <div class="row">
+          <span class="muted">Subtotal</span>
+          <strong id="subtotal">R$ 0,00</strong>
+        </div>
+
+        <div class="row">
+          <span class="muted">Taxa de entrega</span>
+          <strong id="taxa">R$ 0,00</strong>
+        </div>
+
+        <div class="row total">
+          <span>Total</span>
+          <strong id="total">R$ 0,00</strong>
+        </div>
+
+        <div class="divider"></div>
+
+        <label class="field">
+          <span>Entrega</span>
+          <select id="entrega">
+            <option value="Retirar no balcão">Retirar no balcão</option>
+            <option value="Entrega">Entrega</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Endereço (se for entrega)</span>
+          <input id="endereco" type="text" placeholder="Rua, número, bairro..." />
+        </label>
+
+        <label class="field">
+          <span>Observações gerais</span>
+          <input id="obs" type="text" placeholder="Ex: sem cebola / capricha no molho..." />
+        </label>
+
+        <div class="divider"></div>
+
+        <h3 class="h3">✅ Pagamento via Pix</h3>
+        <div class="pixBox">
+          <div class="pixRow">
+            <div>
+              <div class="muted small">Chave Pix</div>
+              <div class="pixKey" id="pixKey">...</div>
+            </div>
+            <button id="copyPix" class="ghost" type="button">Copiar</button>
+          </div>
+          <p class="muted small" style="margin:10px 0 0;">
+            Depois do pagamento, clique em <b>Finalizar pedido</b> para mandar a mensagem completa no WhatsApp.
+          </p>
+        </div>
+
+        <label class="field">
+          <span>Pagou no Pix? (opcional)</span>
+          <select id="pago">
+            <option value="Ainda vou pagar">Ainda vou pagar</option>
+            <option value="Já paguei no Pix">Já paguei no Pix</option>
+          </select>
+        </label>
+
+        <button id="finish" class="btn" type="button">Finalizar pedido no WhatsApp</button>
+      </section>
+    </aside>
+  </main>
+
+  <!-- MODAL (adicionais) -->
+  <div id="modal" class="modal hidden" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true">
+      <div class="modal-head">
+        <div>
+          <h3 id="modalTitle">Item</h3>
+          <p id="modalDesc" class="muted">Descrição</p>
+        </div>
+        <button id="closeModal" class="ghost" type="button">Fechar</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-price">
+          <span class="muted">Preço</span>
+          <strong id="modalPrice">R$ 0,00</strong>
+        </div>
+
+        <div id="addonsArea" class="addons"></div>
+
+        <label class="field">
+          <span>Observação do item (opcional)</span>
+          <input id="itemObs" type="text" placeholder="Ex: sem tomate / borda bem assada..." />
+        </label>
+      </div>
+
+      <div class="modal-foot">
+        <button id="addToCart" class="btn" type="button">Adicionar ao carrinho</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p>© <span id="year"></span> • Pedido por WhatsApp • Pix</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
